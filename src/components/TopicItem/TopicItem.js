@@ -23,20 +23,17 @@ class TopicItem extends Component {
     return (
       <div
         className={"TopicItem " + (active ? "active" : "")}
-        onClick={() => this.onSelectTopic(index, title)}
-      >
-        <p className="TopicItem__title">{title}</p>
-        <p className="TopicItem__data">{data}</p>
+        onClick={() => this.onSelectTopic(index, title)}>
+        <p className='TopicItem__title'>{title}</p>
+        <p className='TopicItem__data'>{data}</p>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setTopicName: name => dispatch(setTopicName(name))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  setTopicName: name => dispatch(setTopicName(name))
+});
 
 export default connect(
   null,

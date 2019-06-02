@@ -7,7 +7,7 @@ import "./TopicList.css";
 class TopicList extends Component {
   constructor(props) {
     super(props);
-    console.log("TopicName:", this.props.list[0].title);
+    // 设置初始值
     this.props.setTopicName(props.list[0].title);
     this.state = {
       current: 0
@@ -34,7 +34,7 @@ class TopicList extends Component {
     const { list } = this.props;
 
     return (
-      <div className="TopicList">
+      <div className='TopicList'>
         {list.map((item, index) => (
           <TopicItem
             active={index === this.state.current ? true : false}
