@@ -1,0 +1,51 @@
+.TopicContainer__Body {
+  background: #fff;
+}
+
+.TopicContainer__Footer {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.TopicContainer__Footer span {
+  padding: 1rem;
+  justify-self: center;
+  align-items: center;
+  position: relative;
+  min-width: 3rem;
+  z-index: 1;
+  flex: 1 1 auto;
+  height: 3rem;
+}
+
+.TopicContainer__Footer span input {
+  display: none;
+}
+
+.TopicContainer__Footer span label {
+  font-family: PingFangSC-Regular;
+  font-size: 1.2rem;
+  color: #acb4b9;
+  letter-spacing: 0;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 1rem;
+  line-height: 1.7rem;
+}
+
+.TopicContainer__Footer span input:checked + label {
+  z-index: -1;
+  font-family: PingFangSC-Regular;
+  font-size: 1.2rem;
+  color: #13334d;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.TopicContainer__Footer span:last-child {
+  border: none;
+}
