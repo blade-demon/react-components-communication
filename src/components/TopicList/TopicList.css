@@ -1,0 +1,10 @@
+.TopicList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.TopicList__body {
+  text-align: center;
+}

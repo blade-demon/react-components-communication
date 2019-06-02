@@ -1,0 +1,28 @@
+.TopicItem {
+  background: #ffffff;
+  border: 1px solid #edf2f6;
+  border-radius: 0.4rem;
+  margin: 1rem;
+  width: 40%;
+}
+
+.TopicItem__title {
+  font-family: PingFangSC-Medium;
+  font-size: 1.5rem;
+  color: #13334d;
+  letter-spacing: 0;
+  margin: 1.7rem auto 0.7rem;
+}
+.TopicItem__data {
+  font-family: DINAlternate-Bold;
+  margin: 0.6rem auto 1.5rem;
+  font-size: 2.4rem;
+  color: #fc7946;
+  letter-spacing: 0;
+}
+
+.TopicItem.active {
+  background: rgba(254, 134, 74, 0.1);
+  border: 1px solid #fe864a;
+  border-radius: 4px;
+}
