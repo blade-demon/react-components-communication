@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { setTopicName } from "../../actions/filters";
 import "./TopicItem.css";
 
 class TopicItem extends Component {
@@ -13,7 +11,7 @@ class TopicItem extends Component {
 
   onSelectTopic = (index, topicName) => {
     this.props.handleSelectTopic(index);
-    this.props.setTopicName(topicName);
+    // this.props.setTopicName(topicName);
   };
 
   render() {
@@ -31,11 +29,4 @@ class TopicItem extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  setTopicName: name => dispatch(setTopicName(name))
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(TopicItem);
+export default TopicItem;
