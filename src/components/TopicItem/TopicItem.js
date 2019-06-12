@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { setTopicName } from "../../actions/filters";
+import { TopicContext } from "../../topic-context";
 import "./TopicItem.css";
 
 class TopicItem extends Component {
@@ -13,7 +12,7 @@ class TopicItem extends Component {
 
   onSelectTopic = (index, topicName) => {
     this.props.handleSelectTopic(index);
-    this.props.setTopicName(topicName);
+    // this.props.setTopicName(topicName);
   };
 
   render() {
@@ -21,21 +20,16 @@ class TopicItem extends Component {
     const { active, index } = this.props;
 
     return (
-      <div
-        className={"TopicItem " + (active ? "active" : "")}
-        onClick={() => this.onSelectTopic(index, title)}>
-        <p className='TopicItem__title'>{title}</p>
-        <p className='TopicItem__data'>{data}</p>
-      </div>
+      <TopicContext.Consumer>
+        <div
+          className={"TopicItem " + (active ? "active" : "")}
+          onClick={() => this.onSelectTopic(index, title)}>
+          <p className='TopicItem__title'>{title}</p>
+          <p className='TopicItem__data'>{data}</p>
+        </div>
+      </TopicContext.Consumer>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  setTopicName: name => dispatch(setTopicName(name))
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(TopicItem);
+export default TopicItem;

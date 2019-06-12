@@ -1,12 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
+// import { TopicContext } from "../../topic-context";
+
 import "./TrendCurve.css";
 
-export default function TrendCurve(props) {
-  const { topicName = "主题名称" } = props;
-  return (
-    <div className="TrendCurve">
-      <strong>{topicName} </strong>
-      VS <strong>沪深300指数</strong>
-    </div>
-  );
+export default class TrendCurve extends Component {
+  render() {
+    return (
+      <div className='TrendCurve'>
+        <strong>{this.context} </strong>
+        VS <strong>沪深300指数</strong>
+      </div>
+    );
+  }
 }

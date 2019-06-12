@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import TopicItem from "../TopicItem/TopicItem";
-import { setTopicName } from "../../actions/filters";
 import "./TopicList.css";
 
 class TopicList extends Component {
   constructor(props) {
     super(props);
     // 设置初始值
-    this.props.setTopicName(props.list[0].title);
+    // this.props.setTopicName(props.list[0].title);
     this.state = {
       current: 0
     };
@@ -49,11 +47,4 @@ class TopicList extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  setTopicName: name => dispatch(setTopicName(name))
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(TopicList);
+export default TopicList;
