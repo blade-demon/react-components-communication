@@ -1,14 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import TrendCurve from "../TrendCurve/TrendCurve";
 
-class Footer extends Component {
-  render() {
-    return (
-      <div>
-        <TrendCurve />
-      </div>
-    );
-  }
+function Footer() {
+  return (
+    <div className="Footer">
+      <TrendCurve />
+    </div>
+  );
 }
 
 export default Footer;

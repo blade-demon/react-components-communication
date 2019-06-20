@@ -1,32 +1,24 @@
 import React, { Component } from "react";
-import { TopicContext } from "../../topic-context";
+import { TopicContext } from "../topic-context";
 import "./TopicItem.css";
 
 class TopicItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: false
-    };
-  }
-
-  onSelectTopic = (index, topicName) => {
-    this.props.handleSelectTopic(index);
-    // this.props.setTopicName(topicName);
-  };
-
   render() {
     const { title, data } = this.props.item;
-    const { active, index } = this.props;
-
+    const { index } = this.props;
     return (
       <TopicContext.Consumer>
-        <div
-          className={"TopicItem " + (active ? "active" : "")}
-          onClick={() => this.onSelectTopic(index, title)}>
-          <p className='TopicItem__title'>{title}</p>
-          <p className='TopicItem__data'>{data}</p>
-        </div>
+        {({ topicIndex, setTopic }) => (
+          <div
+            className={"TopicItem " + (index === topicIndex ? "active" : "")}
+            onClick={() => {
+              return index === topicIndex ? null : setTopic(index, title);
+            }}
+          >
+            <p className="TopicItem__title">{title}</p>
+            <p className="TopicItem__data">{data}</p>
+          </div>
+        )}
       </TopicContext.Consumer>
     );
   }
