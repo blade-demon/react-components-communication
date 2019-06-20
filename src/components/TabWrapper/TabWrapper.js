@@ -15,8 +15,7 @@ class TabWrapper extends Component {
           data: "+4.25%"
         },
         { title: "白酒消费", data: "+3.35%" },
-        { title: "5G", data: "+1.35%" },
-        { title: "超导", data: "+2.35%" }
+        { title: "5G", data: "+1.35%" }
       ],
       [
         {
@@ -28,8 +27,7 @@ class TabWrapper extends Component {
           data: "+14.25%"
         },
         { title: "白酒消费", data: "+3.35%" },
-        { title: "5G", data: "+10.35%" },
-        { title: "超导", data: "+2.35%" }
+        { title: "5G", data: "+10.35%" }
       ],
       [
         {
@@ -41,8 +39,7 @@ class TabWrapper extends Component {
           data: "+4.25%"
         },
         { title: "白酒消费", data: "+9.35%" },
-        { title: "5G", data: "+1.35%" },
-        { title: "超导", data: "+2.35%" }
+        { title: "5G", data: "+1.35%" }
       ],
       [
         {
@@ -54,8 +51,7 @@ class TabWrapper extends Component {
           data: "+14.25%"
         },
         { title: "白酒消费", data: "+3.15%" },
-        { title: "5G", data: "+3.35%" },
-        { title: "超导", data: "+7.35%" }
+        { title: "5G", data: "+3.35%" }
       ],
       [
         {
@@ -67,27 +63,29 @@ class TabWrapper extends Component {
           data: "+4.25%"
         },
         { title: "白酒消费", data: "+6.35%" },
-        { title: "5G", data: "+1.35%" },
-        { title: "超导", data: "+5.35%" }
+        { title: "5G", data: "+1.35%" }
       ]
     ];
     this.state = {
       topicArray,
-      current: 3,
-      list: topicArray[3]
-        .sort(
-          (b, a) =>
-            +a.data.slice(1).replace("%", "") -
-            +b.data.slice(1).replace("%", "")
-        )
-        .filter((item, index) => index < 4)
+      tabIndex: 3,
+      list: topicArray[3],
+      intervalArray: [
+        { key: "yesterday", data: "昨日" },
+        { key: "1_week", data: "近一周" },
+        { key: "1_month", data: "近一月" },
+        { key: "3_month", data: "近三月" },
+        { key: "1_year", data: "近一年" }
+      ]
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick = index => {
-    if (index - this.state.current) {
+  handleClick(tabIndex) {
+    if (tabIndex - this.state.tabIndex) {
       let list = [];
-      switch (index) {
+      switch (tabIndex) {
         case 0:
           list = this.state.topicArray[0];
           break;
@@ -105,34 +103,18 @@ class TabWrapper extends Component {
           break;
       }
 
-      // this.props.setTopicName(
-      //   list.sort(
-      //     (b, a) =>
-      //       +a.data.slice(1).replace("%", "") -
-      //       +b.data.slice(1).replace("%", "")
-      //   )[0].title
-      // );
-
-      this.setState({
-        current: index,
-        list: list
-          .sort(
-            (b, a) =>
-              +a.data.slice(1).replace("%", "") -
-              +b.data.slice(1).replace("%", "")
-          )
-          .filter((item, index) => index < 4)
-      });
+      this.setState({ tabIndex, list });
     }
-  };
+  }
 
   render() {
-    const props = {
+    const config = {
       list: this.state.list,
-      current: this.state.current,
+      tabIndex: this.state.tabIndex,
+      intervalArray: this.state.intervalArray,
       handleClick: this.handleClick
     };
-    return <TopicContainer {...props} />;
+    return <TopicContainer {...config} />;
   }
 }
 

@@ -4,65 +4,27 @@ import "./TopicContainer.css";
 
 class TopicContainer extends Component {
   render() {
-    const { list, current } = this.props;
+    const { intervalArray, handleClick } = this.props;
     return (
       <div>
-        <h2 className="TopicContainer__Head">TopicContainer</h2>
-        <div className="TopicContainer__Body">
-          <TopicList list={list} tabIndex={current} />
+        <h2 className='TopicContainer__Header'>TopicContainer</h2>
+        <div className='TopicContainer__Body'>
+          <TopicList {...this.props} />
         </div>
-        <div className="TopicContainer__Footer">
-          <span>
-            <input
-              name="date"
-              id="yesterday"
-              type="radio"
-              value="yesterday"
-              onChange={() => this.props.handleClick(0)}
-            />
-            <label htmlFor="yesterday">昨日</label>
-          </span>
-          <span>
-            <input
-              name="date"
-              id="week"
-              type="radio"
-              value="week"
-              onChange={() => this.props.handleClick(1)}
-            />
-            <label htmlFor="week">近一周</label>
-          </span>
-          <span>
-            <input
-              name="date"
-              id="month_1"
-              type="radio"
-              value="month_1"
-              onChange={() => this.props.handleClick(2)}
-            />
-            <label htmlFor="month_1">近一月</label>
-          </span>
-          <span>
-            <input
-              defaultChecked
-              name="date"
-              id="month_3"
-              type="radio"
-              value="month_3"
-              onChange={() => this.props.handleClick(3)}
-            />
-            <label htmlFor="month_3">近三月</label>
-          </span>
-          <span>
-            <input
-              name="date"
-              id="year_1"
-              type="radio"
-              value="year_1"
-              onChange={() => this.props.handleClick(4)}
-            />
-            <label htmlFor="year_1">近一年</label>
-          </span>
+        <div className='TopicContainer__Footer'>
+          {intervalArray.map((item, index) => (
+            <span key={index}>
+              <input
+                name='date'
+                id={item.key}
+                type='radio'
+                value={item.data}
+                defaultChecked={index === 3 ? true : false}
+                onChange={() => handleClick(index)}
+              />
+              <label htmlFor={item.key}>{item.data}</label>
+            </span>
+          ))}
         </div>
       </div>
     );
