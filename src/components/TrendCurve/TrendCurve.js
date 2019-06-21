@@ -1,17 +1,17 @@
 import React from "react";
-import { TopicContext } from "../topic-context";
+import { Consumer } from "../topic-context";
 import "./TrendCurve.css";
 
 function TrendCurve() {
   return (
-    <TopicContext.Consumer>
+    <Consumer>
       {({ topicName }) => (
-        <div className="TrendCurve">
+        <div className='TrendCurve'>
           <strong>{topicName}</strong>
           VS <strong>沪深300指数</strong>
         </div>
       )}
-    </TopicContext.Consumer>
+    </Consumer>
   );
 }
 

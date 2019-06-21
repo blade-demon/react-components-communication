@@ -1,15 +1,15 @@
 import React from "react";
-import { TopicContext } from "../topic-context";
+import { Consumer } from "../topic-context";
 
 export const TabItem = props => {
   return (
-    <TopicContext.Consumer>
+    <Consumer>
       {({ intervalTabIndex, setIntervalTab }) => (
         <span key={props.index}>
           <input
-            name="date"
+            name='date'
             id={props.interval.key}
-            type="radio"
+            type='radio'
             value={props.interval.key}
             defaultChecked={props.index === intervalTabIndex ? true : false}
             onChange={() => setIntervalTab(props.index)}
@@ -17,6 +17,6 @@ export const TabItem = props => {
           <label htmlFor={props.interval.key}>{props.interval.value}</label>
         </span>
       )}
-    </TopicContext.Consumer>
+    </Consumer>
   );
 };

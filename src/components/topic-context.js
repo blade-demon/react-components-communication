@@ -1,5 +1,5 @@
-import React from "react";
-export const topicArray = [
+import React, { Component } from "react";
+const topicArray = [
   [
     {
       title: "科创",
@@ -62,7 +62,7 @@ export const topicArray = [
   ]
 ];
 
-export const intervalArray = [
+const intervalArray = [
   { key: "yesterday", value: "昨日" },
   { key: "1_week", value: "近一周" },
   { key: "1_month", value: "近一月" },
@@ -70,12 +70,38 @@ export const intervalArray = [
   { key: "1_year", value: "近一年" }
 ];
 
-export const defaultIntervalIndex = 3;
+const defaultIntervalIndex = 3;
 
-export const TopicContext = React.createContext({
-  intervalTabIndex: 3,
-  topicList: [],
-  topicIndex: 0,
-  topicName: "",
-  setTopic: () => {}
-});
+export const { Provider, Consumer } = React.createContext();
+
+export class TopicProvider extends Component {
+  state = {
+    topicList: topicArray[defaultIntervalIndex],
+    intervalArray,
+    intervalTabIndex: defaultIntervalIndex,
+    topicName: topicArray[defaultIntervalIndex][0].title,
+    topicIndex: 0,
+    setIntervalTab: this.setIntervalTab.bind(this),
+    setTopic: this.setTopic.bind(this)
+  };
+
+  setIntervalTab(intervalTabIndex) {
+    this.setState({
+      topicList: topicArray[intervalTabIndex],
+      intervalTabIndex,
+      topicIndex: 0,
+      topicName: topicArray[intervalTabIndex][0].title
+    });
+  }
+
+  setTopic(topicIndex, topicName) {
+    this.setState({
+      topicIndex,
+      topicName
+    });
+  }
+
+  render() {
+    return <Provider value={this.state}>{this.props.children}</Provider>;
+  }
+}
