@@ -1,32 +1,26 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import "./TopicItem.css";
 
-class TopicItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: false
-    };
-  }
+function TopicItem(props, context) {
+  const { title, data } = props.item;
+  const { index } = props;
 
-  onSelectTopic = (index, topicName) => {
-    this.props.handleSelectTopic(index);
-    // this.props.setTopicName(topicName);
-  };
-
-  render() {
-    const { title, data } = this.props.item;
-    const { active, index } = this.props;
-
-    return (
-      <div
-        className={"TopicItem " + (active ? "active" : "")}
-        onClick={() => this.onSelectTopic(index, title)}>
-        <p className='TopicItem__title'>{title}</p>
-        <p className='TopicItem__data'>{data}</p>
-      </div>
-    );
-  }
+  return (
+    <div
+      className={"TopicItem " + (index === context.topicIndex ? "active" : "")}
+      onClick={() => context.setTopic(index, title)}>
+      <p className='TopicItem__title'>{title}</p>
+      <p className='TopicItem__data'>{data}</p>
+    </div>
+  );
 }
+
+// 声明context类型
+TopicItem.contextTypes = {
+  topicIndex: PropTypes.number,
+  topicName: PropTypes.string,
+  setTopic: PropTypes.func
+};
 
 export default TopicItem;
