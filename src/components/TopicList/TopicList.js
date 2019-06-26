@@ -1,45 +1,46 @@
 import React, { Component } from "react";
 import TopicItem from "../TopicItem/TopicItem";
+import { EE } from "../../";
 import "./TopicList.css";
 
 class TopicList extends Component {
-  constructor(props) {
-    super(props);
-    // 设置初始值
-    // this.props.setTopicName(props.list[0].title);
-    this.state = {
-      current: 0
-    };
+  state = {
+    currentTopic: 0
+  };
+
+  componentDidMount() {
+    // 监听周期变化
+    EE.on("change-interval", () => {
+      this.setState({
+        currentTopic: 0
+      });
+    });
+
+    EE.emit("select-topic", {
+      index: 0,
+      topicName: this.props.currentTopics[0].title
+    });
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.tabIndex !== nextProps.tabIndex) {
-      this.setState({
-        current: 0
-      });
-    }
-  }
-
-  handleSelectTopic = index => {
-    if (index !== this.state.current) {
-      this.setState({
-        current: index
-      });
+  // 处理topic选中状态
+  handleSelectTopic = currentTopic => {
+    if (currentTopic !== this.state.currentTopic) {
+      this.setState({ currentTopic });
     }
   };
 
   render() {
-    const { list } = this.props;
-
+    const { currentTopics, setTopicName } = this.props;
     return (
       <div className='TopicList'>
-        {list.map((item, index) => (
+        {currentTopics.map((item, index) => (
           <TopicItem
-            active={index === this.state.current ? true : false}
+            active={index === this.state.currentTopic ? true : false}
             item={item}
             key={index}
             index={index}
             handleSelectTopic={() => this.handleSelectTopic(index)}
+            setTopicName={setTopicName}
           />
         ))}
       </div>

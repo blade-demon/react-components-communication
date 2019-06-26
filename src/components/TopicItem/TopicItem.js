@@ -1,17 +1,19 @@
 import React, { Component } from "react";
+import { EE } from "../..";
 import "./TopicItem.css";
 
 class TopicItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: false
-    };
-  }
+  state = {
+    active: false
+  };
 
+  // 选择主题
   onSelectTopic = (index, topicName) => {
     this.props.handleSelectTopic(index);
-    // this.props.setTopicName(topicName);
+    EE.emit("select-topic", {
+      index,
+      topicName
+    });
   };
 
   render() {
